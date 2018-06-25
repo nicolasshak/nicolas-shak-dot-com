@@ -1,0 +1,12 @@
+.temp-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.header {
+	display: flex-row;
+}
+
+.nav-buttons {
+
+}
