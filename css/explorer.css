@@ -1,10 +1,19 @@
+html {
+	margin: 0px;
+	padding: 0px;
+}
+
 body {
+	margin: 0px;
+	padding: 0px;
 	background-color: rgb(25, 25, 25);
 }
 
 .temp-wrapper {
+	height: 100vh;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 .window {
@@ -143,54 +152,58 @@ body {
 }
 
 .files {
-	
-}
-
-.files {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 }
 
 .files li {
-	width: 100%;
 	min-width: 650px;
-	margin-top: 5px;
-}
-
-#sorting {
-	display: flex;
-	justify-content: flex-end;
-	margin: 0px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	background-color: rgb(245,245, 245);
-	border-radius: 1px 1px 1px 1px;
-}
-
-.name {
-	display: inline;
-	margin-right: auto;
-	min-width: 200px;
-	padding-left: 10px;
-}
-
-.metric {
-	width: 145px;
-	padding-left: 5px;
-	display: flex;
-	justify-content: flex-start;
-	border-left: 1px solid rgb(192, 192, 192);
 }
 
 .file {
 	display: flex;
 	justify-content: flex-end;
+	padding: 5px 0px 0px 5px;
+}
+
+.sorting {
+	padding: 5px 0px 5px 5px;
+	background-color: rgb(245,245, 245);
+}
+
+.metric {
+	display: flex;
+	padding: 0px 10px;
 }
 
 .file-name {
-	display: block;
+	min-width: 200px;
+	display: flex;
 	margin-right: auto;
-	padding-left: 10px;
+}
+
+.date {
+	width: 200px;
+}
+
+.size {
+	width: 100px;
+	justify-content: flex-end;
+}
+
+.filetype {
+	width: 100px;
+}
+
+.sort-by {
+	justify-content: flex-start;
+}
+
+.web {
+	height: 16px;
+	width: 16px;
+	margin-right: 5px;
+	background-image: url("../img/glyphicons-37-file.png");
 }
 
