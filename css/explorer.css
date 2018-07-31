@@ -207,3 +207,23 @@ body {
 	background-image: url("../img/glyphicons-37-file.png");
 }
 
+.folder {
+	display: flex;
+	flex-direction: column;
+}
+
+.folder-info {
+	display: flex;
+}
+
+.folder-icon {
+	height: 16px;
+	width: 16px;
+	margin-right: 5px;
+	background-image: url("../img/glyphicons-441-folder-closed.png");
+}
+
+.folder-contents {
+	padding: 0px 0px 0px 5px;
+}
+

@@ -1,16 +1,56 @@
-var categories = document.getElementsByClassName("collapse");
-console.log(categories);
-var i;
+function createCORSRequest(method, url) {
 
-for(i = 0; i < categories.length; i++) {
-	console.log(categories);
-	categories[i].addEventListener("click", function() {
-		var collapsable = this.parentElement.parentElement.nextElementSibling;
-		if(collapsable.style.maxHeight) {
-			collapsable.style.maxHeight = null;
-		}
-		else {
-			collapsable.style.maxHeight = collapsable.scrollHeight + "px";
-		}
-	});
+	var req = new XMLHttpRequest();
+	if('withCredentials' in req) {
+		req.open(method, url, true);
+	}
+	else if (typeof XDomainRequest != 'undefined') {
+		req = new XDomainRequest();
+		req.open(method, url);
+	}
+	else {
+		req = null;
+	}
+	return req;
+}
+
+function clearContent(elementID) {
+	document.getElementById(elementID).innerHTML = "";
+}
+
+function setContent(elementID, html) {
+	document.getElementById(elementID).innerHTML = html;
+}
+
+function buildHTML(tag, attrs, html) {
+
+	var h = '<' + tag;
+	for(attr in attrs) {
+		h += ' ' + attr + '="' + attrs[attr] + '"';
+	} 
+	return h + '>' + html + '</' + tag + '>';
+}
+
+function buildFile(name, date, size, filetype) {
+	return ''
+}
+
+function buildFolder(name, date, contents) {
+	return ''
+}
+
+
+window.onload = function() {
+
+	http = new XMLHttpRequest();
+	url = 'http://localhost/test:3000';
+	http.open('GET', url, true);
+	http.send();
+
+	var html;
+	http.onreadystatechange=(e)=> {
+		html = http.responseText;
+	}
+
+	setContent(1, html);
 }
