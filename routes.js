@@ -1,4 +1,4 @@
-
+const path = require('path');
 
 module.exports = function(app) {
 
@@ -7,6 +7,6 @@ module.exports = function(app) {
 	})
 
 	app.get('/', function(req, res) {
-		res.sendFile('explorer.html');
+		res.sendFile(path.join(__dirname + '/explorer.html');
 	})
 }
