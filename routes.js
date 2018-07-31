@@ -9,6 +9,5 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		res.sendFile(path.join(__dirname + '/explorer.html'));
 		res.sendFile(path.join(__dirname + '/css/explorer.css'));
-		res.end();
 	})
 }
