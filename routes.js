@@ -2,13 +2,13 @@ const path = require('path');
 
 module.exports = function(app) {
 
+	app.use(express.static(__dirname + '/public'));
+
 	app.get('/test', function(req, res) {
 		res.send('helloworld');
 	})
 
 	app.get('/', function(req, res) {
 		res.sendFile(path.join(__dirname + '/explorer.html'));
-		res.sendFile(path.join(__dirname + '/css/explorer.css'));
-		res.end();
 	})
 }
