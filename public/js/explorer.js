@@ -44,13 +44,16 @@ window.onload = function() {
 
 	http = new XMLHttpRequest();
 	url = 'http://ec2-18-206-255-255.compute-1.amazonaws.com:3000/test';
-	http.open('GET', url, true);
-	http.send();
 
 	var html = 'This is wrong';
-	http.onreadystatechange=(e)=> {
-		html = http.responseText;
-	}
+	http.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 400) {
+			html = this.responseText;
+		}
+	};
+
+	http.open('GET', url, true);
+	http.send();
 
 	console.log(html);
 }
