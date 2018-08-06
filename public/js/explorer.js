@@ -47,10 +47,9 @@ window.onload = function() {
 	http.open('GET', url, true);
 	http.send();
 
-	var html;
 	http.onreadystatechange=(e)=> {
-		html = http.responseText;
+		var html = http.responseText;
 	}
 
-	setContent(1, html);
+	console.log(html);
 }
