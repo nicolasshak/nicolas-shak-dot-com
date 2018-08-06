@@ -43,7 +43,7 @@ function buildFolder(name, date, contents) {
 window.onload = function() {
 
 	http = new XMLHttpRequest();
-	url = 'http://ec2-18-206-255-255.compute-1.amazonaws.com/test:3000';
+	url = 'http://ec2-18-206-255-255.compute-1.amazonaws.com:3000/test';
 	http.open('GET', url, true);
 	http.send();
 
