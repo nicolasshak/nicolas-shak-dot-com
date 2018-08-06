@@ -47,8 +47,9 @@ window.onload = function() {
 	http.open('GET', url, true);
 	http.send();
 
+	var html = 'This is wrong';
 	http.onreadystatechange=(e)=> {
-		var html = http.responseText;
+		html = http.responseText;
 	}
 
 	console.log(html);
