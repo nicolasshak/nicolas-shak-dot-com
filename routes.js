@@ -1,9 +1,12 @@
 const path = require('path');
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
 module.exports = function(app) {
 
 	app.get('/test', function(req, res) {
-		res.send('helloworld');
+		res.render('file', {});
 	});
 
 	app.get('/', function(req, res) {
