@@ -1,9 +1,9 @@
 const path = require('path');
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
 module.exports = function(app) {
+
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
 		res.render('file', {});
