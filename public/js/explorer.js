@@ -45,7 +45,7 @@ window.onload = function() {
 	http = new XMLHttpRequest();
 	url = 'http://ec2-18-206-255-255.compute-1.amazonaws.com:3000/test';
 
-	var html = 'This is wrong';
+	var html;
 	http.onreadystatechange = function() {
 		if(this.readyState == 4 && this.status == 200) {
 			html = this.responseText;
