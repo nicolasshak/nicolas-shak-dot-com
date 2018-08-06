@@ -48,13 +48,12 @@ window.onload = function() {
 	var html = 'This is wrong';
 	http.onreadystatechange = function() {
 		if(this.readyState == 4 && this.status == 200) {
-			console.log('Response Text: ' + this.responseText);
 			html = this.responseText;
+
+			setContent(1, html);
 		}
 	};
 
 	http.open('GET', url, true);
 	http.send();
-
-	console.log(html);
 }
