@@ -19,8 +19,8 @@ module.exports = function(app) {
 					}
 				});
 			});
+			res.send(html);
 		});
-		res.send(html);
 	});
 
 	app.get('/', function(req, res) {
