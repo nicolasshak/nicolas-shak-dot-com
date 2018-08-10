@@ -7,12 +7,14 @@ module.exports = function(app) {
 	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
-		var names = fs.readdir(__dirname, (err, files) => {
+		var names = fs.readdir(__dirname, function(err, files) {
 			files.forEach(file => {
 				console.log(file);
+				fs.stat(__dirname + file, function(err, stats) {
+					console.log('size: ' + stats.size);
+				});
 			});
 		});
-		console.log(names);
 		res.render('file', {file_name: 'helloworld.txt', date: 'June 27, 2018', size: '15 KB', filetype: 'Text'});
 	});
 
