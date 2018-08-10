@@ -40,10 +40,12 @@ function buildFolder(name, date, contents) {
 }
 
 
+
+
 window.onload = function() {
 
 	http = new XMLHttpRequest();
-	url = 'http://ec2-18-206-255-255.compute-1.amazonaws.com:3000/test';
+	url = 'http://ec2-34-230-17-245.compute-1.amazonaws.com:3000';
 
 	var html;
 	http.onreadystatechange = function() {
@@ -54,6 +56,6 @@ window.onload = function() {
 		}
 	};
 
-	http.open('GET', url, true);
+	http.open('GET', url + '/test', true);
 	http.send();
 }
