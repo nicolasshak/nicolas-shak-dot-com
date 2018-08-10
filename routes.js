@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 module.exports = function(app) {
 
@@ -6,6 +7,12 @@ module.exports = function(app) {
 	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
+		var names = fs.readdir(__dirname, (err, files) => {
+			files.forEach(file => {
+				console.log(file);
+			});
+		});
+		console.log(names);
 		res.render('file', {file_name: 'helloworld.txt', date: 'June 27, 2018', size: '15 KB', filetype: 'Text'});
 	});
 
