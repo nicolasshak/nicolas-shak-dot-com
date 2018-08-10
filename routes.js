@@ -15,11 +15,10 @@ module.exports = function(app) {
 				fs.stat(__dirname + '/' + file, function(err, stats) {
 					if (err) throw err;
 					else {
-						html += res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
+						console.log(res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'}));
 					}
 				});
 			});
-			res.send(html);
 		});
 	});
 
