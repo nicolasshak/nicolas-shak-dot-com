@@ -10,7 +10,7 @@ module.exports = function(app) {
 		var names = fs.readdir(__dirname, function(err, files) {
 			files.forEach(file => {
 				console.log(file);
-				fs.stat(__dirname + file, function(err, stats) {
+				fs.stat(__dirname + '/' + file, function(err, stats) {
 					if (err) throw err;
 					else {
 						console.log('size: ' + stats.size);
