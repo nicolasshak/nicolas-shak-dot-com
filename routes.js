@@ -11,7 +11,10 @@ module.exports = function(app) {
 			files.forEach(file => {
 				console.log(file);
 				fs.stat(__dirname + file, function(err, stats) {
-					console.log('size: ' + stats.size);
+					if (err) throw err;
+					else {
+						console.log('size: ' + stats.size);
+					}
 				});
 			});
 		});
