@@ -7,18 +7,20 @@ module.exports = function(app) {
 	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
-		var names = fs.readdir(__dirname, function(err, files) {
+
+		var html = '';
+
+		fs.readdir(__dirname, function(err, files) {
 			files.forEach(file => {
 				fs.stat(__dirname + '/' + file, function(err, stats) {
 					if (err) throw err;
 					else {
-						console.log(file);
-						console.log('size: ' + stats.size);
+						html += res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
 					}
 				});
 			});
 		});
-		res.render('file', {file_name: 'helloworld.txt', date: 'June 27, 2018', size: '15 KB', filetype: 'Text'});
+		res.send(html);
 	});
 
 	app.get('/', function(req, res) {
