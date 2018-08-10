@@ -9,10 +9,10 @@ module.exports = function(app) {
 	app.get('/test', function(req, res) {
 		var names = fs.readdir(__dirname, function(err, files) {
 			files.forEach(file => {
-				console.log(file);
 				fs.stat(__dirname + '/' + file, function(err, stats) {
 					if (err) throw err;
 					else {
+						console.log(file);
 						console.log('size: ' + stats.size);
 					}
 				});
