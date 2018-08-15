@@ -16,6 +16,7 @@ module.exports = function(app) {
 					if (err) throw err;
 					else {
 						res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
+						console.log('1');
 					}
 				});
 			});
