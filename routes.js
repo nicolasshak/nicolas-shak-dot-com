@@ -11,11 +11,11 @@ module.exports = function(app) {
 		var html = '';
 
 		fs.readdir(__dirname, function(err, files) {
-			files.forEach(file => {
+			files.forEach(function(file) {
 				fs.stat(__dirname + '/' + file, function(err, stats) {
 					if (err) throw err;
 					else {
-						console.log(res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'}));
+						res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
 					}
 				});
 			});

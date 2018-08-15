@@ -22,6 +22,10 @@ function setContent(elementID, html) {
 	document.getElementById(elementID).innerHTML = html;
 }
 
+function addContent(elementID, html) {
+	document.getElementById(elementID).innerHTML += html;
+}
+
 function buildHTML(tag, attrs, html) {
 
 	var h = '<' + tag;
@@ -52,7 +56,7 @@ window.onload = function() {
 		if(this.readyState == 4 && this.status == 200) {
 			html = this.responseText;
 
-			setContent(1, html);
+			addContent(1, html);
 		}
 	};
 
