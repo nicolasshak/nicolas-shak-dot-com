@@ -20,7 +20,6 @@ module.exports = function(app) {
 				});
 			}
 		});
-		res.end();
 	});
 
 	app.get('/', function(req, res) {
