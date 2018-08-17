@@ -15,7 +15,7 @@ module.exports = function(app) {
 			if(err) throw err;
 			else {
 
-				var template = fs.readFileSync(__dirname + '/views/file.ejs');
+				var template = fs.readFileSync(__dirname + '/views/file.ejs', 'utf-8');
 
 				files.forEach(function(file) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
