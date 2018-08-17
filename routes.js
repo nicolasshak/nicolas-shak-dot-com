@@ -20,8 +20,11 @@ module.exports = function(app) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
 						if (err) throw err;
 						else {
-							template.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
-							console.log('1');
+							res.send(ejs.render(template, 
+								{file_name: file,
+								date: stats.ctime, 
+								size: stats.size,
+								filetype: 'Text'}));
 						}
 					});
 				});
