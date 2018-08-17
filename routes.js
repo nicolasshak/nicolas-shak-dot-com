@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const ejs = require('ejs');
 
 module.exports = function(app) {
 
@@ -14,21 +13,15 @@ module.exports = function(app) {
 		fs.readdir(__dirname, function(err, files) {
 			if(err) throw err;
 			else {
-
-				var template = fs.readFileSync(__dirname + '/views/file.ejs', 'utf-8');
-
 				files.forEach(function(file) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
 						if (err) throw err;
 						else {
-							res.send(ejs.render(template, 
-								{file_name: file,
-								date: stats.ctime, 
-								size: stats.size,
-								filetype: 'Text'}));
+							res.write('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
 						}
 					});
 				});
+				res.end();
 			}
 		});
 	});
