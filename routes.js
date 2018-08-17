@@ -11,15 +11,21 @@ module.exports = function(app) {
 		var html = '';
 
 		fs.readdir(__dirname, function(err, files) {
-			files.forEach(function(file) {
-				fs.stat(__dirname + '/' + file, function(err, stats) {
-					if (err) throw err;
-					else {
-						res.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
-						console.log('1');
-					}
+			if(err) throw err;
+			else {
+
+				var template = fs.readFileSync(__dirname + '/views/explorer.ejs');
+
+				files.forEach(function(file) {
+					fs.stat(__dirname + '/' + file, function(err, stats) {
+						if (err) throw err;
+						else {
+							template.render('file', {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'});
+							console.log('1');
+						}
+					});
 				});
-			});
+			}
 		});
 	});
 
