@@ -21,7 +21,9 @@ module.exports = function(app) {
 						}
 					});
 				});
-				res.end();
+				res.end(function(err) {
+					if(err) throw err;
+				});
 			}
 		});
 	});
