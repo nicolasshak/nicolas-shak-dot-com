@@ -7,9 +7,6 @@ module.exports = function(app) {
 	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
-
-		var html = '';
-
 		fs.readdir(__dirname, function(err, files) {
 			if(err) throw err;
 			else {
@@ -21,11 +18,9 @@ module.exports = function(app) {
 						}
 					});
 				});
-				res.end(function(err) {
-					if(err) throw err;
-				});
 			}
 		});
+		res.end();
 	});
 
 	app.get('/', function(req, res) {
