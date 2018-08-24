@@ -49,7 +49,8 @@ function buildFolder(name, date, contents) {
 window.onload = function() {
 
 	http = new XMLHttpRequest();
-	url = 'http://ec2-34-230-17-245.compute-1.amazonaws.com:3000';
+	url = 'http://localhost:3000';
+	//url = 'http://ec2-34-230-17-245.compute-1.amazonaws.com:3000';
 
 	var html;
 	http.onreadystatechange = function() {
