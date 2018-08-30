@@ -21,7 +21,7 @@ module.exports = function(app) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
 						if (err) throw err;
 						else {
-							res.write(ejs.render(template, {file_name: file, date: stats.ctime, size: stats.size, filetype: 'Text'}));
+							res.write(ejs.render(template, {file_name: file, date: parseDate(stats.ctime), size: stats.size, filetype: 'Text'}));
 						}
 
 						if(i == files.length - 1) {
@@ -39,4 +39,13 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		res.sendFile(path.join(__dirname + '/explorer.html'));
 	});
+}
+
+function parseDate(date) {
+	var tok = (date + '').split(' ');
+	var final = '';
+	for(var i = 0; i < 4; i++) {
+		final += tok[i] + ' ';
+	}
+	return final;
 }
