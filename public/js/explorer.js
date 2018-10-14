@@ -43,8 +43,23 @@ function buildFolder(name, date, contents) {
 	return ''
 }
 
+function makeFilesClickable() {
+	var fileList = document.getElementById('1');
+	var buttons = fileList.getElementsByClassName('file');
 
-
+	for(var i = 0; i < buttons.length; i++) {
+		buttons[i].addEventListener('click', function() {
+			var current = document.getElementsByClassName('active');
+			if(current.length == 0) {
+				this.className += ' active';
+			}
+			else {
+				current[0].className = current[0].className.replace(' active', '');
+				this.className += ' active';
+			}
+		});
+	}
+}
 
 window.onload = function() {
 
@@ -58,6 +73,7 @@ window.onload = function() {
 			html = this.responseText;
 
 			addContent(1, html);
+			makeFilesClickable();
 		}
 	};
 

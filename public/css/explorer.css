@@ -151,20 +151,24 @@ body {
 	border-radius: 0px 0px 5px 5px;
 }
 
-.files {
+.file-list {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 }
 
-.files li {
+.file-list li {
 	min-width: 650px;
 }
 
 .file {
 	display: flex;
 	justify-content: flex-end;
-	padding: 5px 0px 0px 5px;
+}
+
+.active {
+	background-color: blue;
+	color: white;
 }
 
 .sorting {
