@@ -43,6 +43,9 @@ function buildFolder(name, date, contents) {
 	return ''
 }
 
+/*
+ * Make files in explorer highlight on click, and perform contextual action on double click
+ */
 function makeFilesClickable() {
 	var fileList = document.getElementById('1');
 	var buttons = fileList.getElementsByClassName('file');
@@ -57,6 +60,9 @@ function makeFilesClickable() {
 				current[0].className = current[0].className.replace(' active', '');
 				this.className += ' active';
 			}
+		});
+		buttons[i].addEventListener('dblclick', function() {
+			console.log('double click!');
 		});
 	}
 }
