@@ -14,14 +14,15 @@ module.exports = function(app) {
 
 				res.setHeader('Content-Type', 'text/html');
 
-				var template = fs.readFileSync(__dirname + '/views/file.ejs', 'ascii');
+				var fileTemplate = fs.readFileSync(__dirname + '/views/file.ejs', 'ascii');
+				var folderTemplate = fs.readFileSync(__dirname + '/views/folder.ejs', 'ascii');
 				var i = 0;
 
 				files.forEach(function(file) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
 						if (err) throw err;
 						else {
-							res.write(ejs.render(template, {
+							res.write(ejs.render(fileTemplate, {
 								file_name: file,
 								date: parseDate(stats.ctime),
 								size: getFileSize(stats.size),

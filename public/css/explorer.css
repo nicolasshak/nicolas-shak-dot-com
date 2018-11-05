@@ -161,7 +161,7 @@ body {
 	min-width: 650px;
 }
 
-.file {
+.file, .folder {
 	display: flex;
 	justify-content: flex-end;
 }
@@ -185,6 +185,7 @@ body {
 	min-width: 200px;
 	display: flex;
 	margin-right: auto;
+	padding-left: 0px;
 }
 
 .date {
@@ -204,11 +205,22 @@ body {
 	justify-content: flex-start;
 }
 
-.web {
+.toggle {
+	height: 16px;
+	width: 16px;
+}
+
+.file-icon, .folder-icon {
 	height: 16px;
 	width: 16px;
 	margin-right: 5px;
+	margin-left: 26px;
 	background-image: url("../img/glyphicons-37-file.png");
+}
+
+.folder-icon {
+	margin-left: 10px;
+	background-image: url("../img/glyphicons-441-folder-closed.png")
 }
 
 .folder {
@@ -220,14 +232,7 @@ body {
 	display: flex;
 }
 
-.folder-icon {
-	height: 16px;
-	width: 16px;
-	margin-right: 5px;
-	background-image: url("../img/glyphicons-441-folder-closed.png");
-}
-
 .folder-contents {
-	padding: 0px 0px 0px 5px;
+	padding: 0px 0px 0px 16px;
 }
 
