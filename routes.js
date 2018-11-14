@@ -22,11 +22,21 @@ module.exports = function(app) {
 					fs.stat(__dirname + '/' + file, function(err, stats) {
 						if (err) throw err;
 						else {
-							res.write(ejs.render(fileTemplate, {
-								file_name: file,
-								date: parseDate(stats.ctime),
-								size: getFileSize(stats.size),
-								filetype: getFileType(file)}));
+							if(stats.isDirectory()) {
+								res.write(ejs.render(folderTemplate, {
+									file_name: file,
+									date: parseDate(stats.ctime)
+								}))
+
+							}
+							else {
+								res.write(ejs.render(fileTemplate, {
+									file_name: file,
+									date: parseDate(stats.ctime),
+									size: getFileSize(stats.size),
+									filetype: getFileType(file)
+								}));
+							}
 						}
 
 						if(i == files.length - 1) {
