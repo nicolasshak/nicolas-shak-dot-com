@@ -8,47 +8,8 @@ module.exports = function(app) {
 	app.set('view engine', 'ejs');
 
 	app.get('/test', function(req, res) {
-		fs.readdir(__dirname, function(err, files) {
-			if(err) throw err;
-			else {
-
-				res.setHeader('Content-Type', 'text/html');
-
-				var fileTemplate = fs.readFileSync(__dirname + '/views/file.ejs', 'ascii');
-				var folderTemplate = fs.readFileSync(__dirname + '/views/folder.ejs', 'ascii');
-				var i = 0;
-
-				files.forEach(function(file) {
-					fs.stat(__dirname + '/' + file, function(err, stats) {
-						if (err) throw err;
-						else {
-							if(stats.isDirectory()) {
-								res.write(ejs.render(folderTemplate, {
-									file_name: file,
-									date: parseDate(stats.ctime)
-								}))
-
-							}
-							else {
-								res.write(ejs.render(fileTemplate, {
-									file_name: file,
-									date: parseDate(stats.ctime),
-									size: getFileSize(stats.size),
-									filetype: getFileType(file)
-								}));
-							}
-						}
-
-						if(i == files.length - 1) {
-							res.end();
-						}
-						else {
-							i++;
-						}
-					});
-				});
-			}
-		});
+		res.setHeader('Content-Type', 'text/html');
+		makeFolder(__dirname, res);
 	});
 
 	app.get('/', function(req, res) {
@@ -88,3 +49,46 @@ function getFileType(fileName) {
 			return newName + ' File';
 	}
 }
+
+function makeFolder(path, res) {
+	fs.readdir(__dirname + '/', function(err, files) {
+			if(err) throw err;
+			else {
+
+				var fileTemplate = fs.readFileSync(__dirname + '/views/file.ejs', 'ascii');
+				var folderTemplate = fs.readFileSync(__dirname + '/views/folder.ejs', 'ascii');
+				var i = 0;
+
+				files.forEach(function(file) {
+					fs.stat(__dirname + '/' + file, function(err, stats) {
+						if (err) throw err;
+						else {
+							if(stats.isDirectory()) {
+								res.write(ejs.render(folderTemplate, {
+									file_name: file,
+									date: parseDate(stats.ctime),
+									folder_contents: makeFolder(__dirname + '/' + file)
+								}))
+
+							}
+							else {
+								res.write(ejs.render(fileTemplate, {
+									file_name: file,
+									date: parseDate(stats.ctime),
+									size: getFileSize(stats.size),
+									filetype: getFileType(file)
+								}));
+							}
+						}
+
+						if(i == files.length - 1) {
+							return;
+						}
+						else {
+							i++;
+						}
+					});
+				});
+			}
+		});
+	}
