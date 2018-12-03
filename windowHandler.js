@@ -1,19 +1,17 @@
 var explorer = [
-	'<div class="main-wrapper">',
-		'<div id="browser" class="browser">',
-			'<div class="browser-header">',
-				'Browser',
-			'</div>',
-			'<div class="browser-body">',
-				'<table class="files">',
-				'</table>',
-			'</div>',
+	'<div class="window browser">',
+		'<div class="browser-header">',
+			'Browser',
+		'</div>',
+		'<div class="browser-body">',
+			'<table class="files">',
+			'</table>',
 		'</div>',
 	'</div>',
 ].join('\n');
 
 var window1 = [
-	'<div class="window-generic">',
+	'<div class="window window-generic">',
 		'<div class="window-header">',
 			'window',
 		'</div>',

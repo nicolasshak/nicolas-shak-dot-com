@@ -4,11 +4,17 @@ body {
 	background-color: rgb(25, 25, 25);
 }
 
-.main-wrapper {
-	height: 100%;
+.windows {
+	height: 100vh;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.window {
+	 box-shadow: 5px 5px 30px rgb(15, 15, 15);
+	 border-radius: 5px;
 }
 
 .browser {
@@ -36,9 +42,14 @@ body {
 .window-header {
 	padding: 5px;
 	background-color: rgb(175, 175, 175);
+	border-radius: 5px 5px 1px 1px;
 }
 
 .window-contents {
 	padding: 5px;
 	background-color: white;
+	border-radius: 0px 0px 5px 5px;
+	max-height: 500px;
+	max-width: 500px;
+	overflow: scroll;
 }

@@ -34,7 +34,7 @@ var options = {
 
 var table = $('.files').dataTable(options);
 
-jQuery.get('/browse?path=/C:/Home').then(function(data) {
+jQuery.get('/browse?path=/C:').then(function(data) {
 	table.fnClearTable();
 	table.fnAddData(data);
 })
