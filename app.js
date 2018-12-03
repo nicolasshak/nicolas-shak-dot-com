@@ -1,3 +1,5 @@
+const PORT = 3000;
+
 var express = require('express');
 var app = express();
 
@@ -9,7 +11,6 @@ app.use(express.static(__dirname));
 const routes = require('./routes.js');
 routes(app);
 
-var port = 3000;
-app.listen(port, function() {
-	console.log('Server is bound to port: ' + port);
+app.listen(PORT, function() {
+	console.log('Server is bound to port: ', PORT);
 })
