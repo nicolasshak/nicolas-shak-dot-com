@@ -1,4 +1,4 @@
-var explorer = [
+var explorer_text = [
 	'<div class="window browser">',
 		'<div class="browser-header">',
 			'Browser',
@@ -10,30 +10,37 @@ var explorer = [
 	'</div>',
 ].join('\n');
 
-var window1 = [
+var window_text = [
 	'<div class="window window-generic">',
 		'<div class="window-header">',
-			'window',
+			'<div class="window-title">',
+				'{{title}}',
+			'</div>',
+			'<button type="button" onclick="closeWindow(this)" class="window-close">',
+				'X',
+			'</button>',
 		'</div>',
 		'<div class="window-contents">',
+			'{{content}}',
+		'</div>',
+	'</div>'
 ].join('\n');
 
-var window2 = '</div>';
-
 function main() {
-	$('.windows').append(explorer);
+	$('.windows').append(explorer_text);
 	$('.browser').draggable({
 		handle: 'div.browser-header',
 	})
 }
 
-function closeWindow() {
-
+function closeWindow(element) {
+	element.remove();
 }
 
 function createWindow(contents) {
 	
-	var newWindow = window1 + contents + window2;
+	var newWindow = window_text.replace(/{{title}}/g, 'window');
+	newWindow = newWindow.replace(/{{content}}/g, contents)
 
 	$('.windows').append(newWindow);
 	$('.window-generic').draggable({
@@ -51,8 +58,9 @@ function makeDraggable(element) {
 
 function escape(code) {
 
-	var escaped = code.replace(/"/g, '&quot;');
-	escaped = escaped.replace(/'/g, '&quot;');
+	var escaped = code;
+	//escaped = code.replace(/'/g, '&quot;');
+	//escaped = escaped.replace(/"/g, '&quot;');
 	escaped = escaped.replace(/&/g, '&amp;');
 	escaped = escaped.replace(/</g, '&lt;');
 	escaped = escaped.replace(/>/g, '&gt;');
