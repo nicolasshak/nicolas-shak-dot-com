@@ -1,11 +1,9 @@
 var explorer_text = [
 	'<div class="window browser">',
-		'<div class="window-header">',
-			'<div class="window-title">',
-				'Browser',
-			'</div>',
+		'<div class="browser-header">',
+			'Browser',
 		'</div>',
-		'<div class="window-contents">',
+		'<div class="browser-body">',
 			'<table class="files">',
 			'</table>',
 		'</div>',
@@ -22,21 +20,17 @@ var window_text = [
 				'X',
 			'</button>',
 		'</div>',
-
+		'<div class="window-contents">',
 			'{{content}}',
-
+		'</div>',
 	'</div>'
 ].join('\n');
 
 function main() {
 	$('.windows').append(explorer_text);
 	$('.browser').draggable({
-		handle: 'div.window-header',
-	});
-	$('.browser').resizable({
-		minHeight: 84,
-		minWidth: 168
-	});
+		handle: 'div.browser-header',
+	})
 }
 
 function closeWindow(element) {
@@ -49,25 +43,13 @@ function createWindow(contents) {
 	newWindow = newWindow.replace(/{{content}}/g, contents)
 
 	$('.windows').append(newWindow);
-
 	$('.window-generic').draggable({
 		handle: 'div.window-header'
-	});
-
-	$('.window-generic').resizable({
-		minHeight: 84,
-		minWidth: 168
-	});
-
-	$('.window').click(function() {
-		$(this).addClass('top').removeClass('bottom');
-		$(this).siblings().removeClass('top').addClass('bottom');
-        $(this).css("z-index", a++);
 	});
 }
 
 function createFormattedWindow(contents) {
-	createWindow('<pre class="window-contents">' + contents + '</pre>');
+	createWindow('<pre>' + contents + '</pre>');
 }
 
 function makeDraggable(element) {

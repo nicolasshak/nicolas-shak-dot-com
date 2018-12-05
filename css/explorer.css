@@ -24,39 +24,30 @@ pre {
 }
 
 .window {
-	height: 500px;
-	width: 700px;
-
-	display: flex;
-	flex-direction: column;
-
-	position: fixed !important;
-	box-shadow: 5px 5px 30px rgb(15, 15, 15);
-	border-radius: 5px;
-	background-color: white;
+	 box-shadow: 5px 5px 30px rgb(15, 15, 15);
+	 border-radius: 5px;
 }
 
 .browser {
-
+	width: 70vw;
 }
 
-.window-generic {
-	height: 300;
-	width: 500;
-}
-
-.window-header {
+.browser-header {
 	background-color: rgb(175, 175, 175);
 	padding: 5pt;
 	border-radius: 5px 5px 1px 1px;
-	flex: 0 0 19px;
 }
 
-.window-contents {
+.browser-body {
+	background-color: white;
+	height: 400pt;
 	border-radius: 0px 0px 5px 5px;
-	padding: 5px;
-	overflow: auto;
-	height: 100%;
+	padding: 10px;
+}
+
+.window-generic {
+	position: absolute;
+	top: 50vh;
 }
 
 .window-header {
@@ -71,21 +62,11 @@ pre {
 	margin-right: auto;
 }
 
-div.dataTables_length {
-	display: none;
-}
-
-div.ui-icon-gripsmall-diagonal-se {
+.window-contents {
+	padding: 10px;
 	background-color: white;
-	border-radius: 16px;
-}
-
-.top {
-	z-index: 2; 
-	position: relative
-}
-
-.bottom {
-	z-index: 1; 
-	position: relative
+	border-radius: 0px 0px 5px 5px;
+	height: 300px;
+	width: 500px;
+	overflow: scroll;
 }
