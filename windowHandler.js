@@ -1,9 +1,11 @@
 var explorer_text = [
 	'<div class="window browser">',
-		'<div class="browser-header">',
-			'Browser',
+		'<div class="window-header">',
+			'<div class="window-title">',
+				'Browser',
+			'</div>',
 		'</div>',
-		'<div class="browser-body">',
+		'<div class="window-contents">',
 			'<table class="files">',
 			'</table>',
 		'</div>',
@@ -20,21 +22,25 @@ var window_text = [
 				'X',
 			'</button>',
 		'</div>',
-		'<div class="window-contents">',
+
 			'{{content}}',
-		'</div>',
+
 	'</div>'
 ].join('\n');
 
 function main() {
 	$('.windows').append(explorer_text);
 	$('.browser').draggable({
-		handle: 'div.browser-header',
-	})
+		handle: 'div.window-header',
+	});
+	$('.browser').resizable({
+		minHeight: 84,
+		minWidth: 168
+	});
 }
 
 function closeWindow(element) {
-	element.remove();
+	$(element).parent().parent().remove();
 }
 
 function createWindow(contents) {
@@ -46,10 +52,14 @@ function createWindow(contents) {
 	$('.window-generic').draggable({
 		handle: 'div.window-header'
 	});
+	$('.window-generic').resizable({
+		minHeight: 84,
+		minWidth: 168
+	});
 }
 
 function createFormattedWindow(contents) {
-	createWindow('<pre>' + contents + '</pre>');
+	createWindow('<pre class="window-contents">' + contents + '</pre>');
 }
 
 function makeDraggable(element) {

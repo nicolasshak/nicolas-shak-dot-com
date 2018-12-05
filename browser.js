@@ -4,6 +4,8 @@ var options = {
     "bServerSide": false,
     "bPaginate": false,
     "bAutoWidth": false,
+    "searching": false,
+    "scrollCollapse": true,
     "sScrollY":"250px",
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
