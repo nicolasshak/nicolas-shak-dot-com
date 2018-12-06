@@ -1,4 +1,7 @@
-var explorer_text = [
+/*
+ * Templates
+ */
+var browser_text = [
 	'<div class="window browser">',
 		'<div class="window-header">',
 			'<div class="window-title">',
@@ -13,7 +16,7 @@ var explorer_text = [
 ].join('\n');
 
 var window_text = [
-	'<div class="window window-generic">',
+	'<div class="window window-generic" style="z-index: 9999">',
 		'<div class="window-header">',
 			'<div class="window-title">',
 				'{{title}}',
@@ -28,62 +31,78 @@ var window_text = [
 	'</div>'
 ].join('\n');
 
+/*
+ * Startup
+ */
 function main() {
-	$('.windows').append(explorer_text);
-	$('.browser').draggable({
-		handle: 'div.window-header',
-	});
-	$('.browser').resizable({
-		minHeight: 84,
-		minWidth: 168
-	});
+	addWindow(browser_text, "");
+
+	
 }
+
+/*
+ * Window Handlers
+ */
 
 function closeWindow(element) {
 	$(element).parent().parent().remove();
 }
 
-function createWindow(contents) {
+function addFormattedWindow(contents) {
+	addWindow(window_text, '<pre class="window-contents">' + escape(contents) + '</pre>');
+}
+
+
+function addWindow(template, contents) {
 	
-	var newWindow = window_text.replace(/{{title}}/g, 'window');
+	var newWindow = template.replace(/{{title}}/g, 'window');
 	newWindow = newWindow.replace(/{{content}}/g, contents)
 
 	$('.windows').append(newWindow);
 
-	$('.window-generic').draggable({
-		handle: 'div.window-header'
+	$('.window').draggable({
+		handle: 'div.window-header',
+		stack: '.window'
 	});
 
-	$('.window-generic').resizable({
+	$('.window').resizable({
 		minHeight: 84,
 		minWidth: 168
 	});
 
-	$('.window').click(function() {
-		$(this).addClass('top').removeClass('bottom');
-		$(this).siblings().removeClass('top').addClass('bottom');
-        $(this).css("z-index", a++);
+	$('.window').on('click', function() {
+		bringFront($(this), '.window');
 	});
 }
 
-function createFormattedWindow(contents) {
-	createWindow('<pre class="window-contents">' + contents + '</pre>');
-}
-
-function makeDraggable(element) {
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-}
-
+/*
+ * Helper functions
+ */
 function escape(code) {
 
 	var escaped = code;
-	//escaped = code.replace(/'/g, '&quot;');
-	//escaped = escaped.replace(/"/g, '&quot;');
 	escaped = escaped.replace(/&/g, '&amp;');
 	escaped = escaped.replace(/</g, '&lt;');
 	escaped = escaped.replace(/>/g, '&gt;');
 
 	return escaped;
+}
+
+function bringFront(elem, stack){
+
+	var min, group = $(stack).sort(function(a, b) {
+		return ((parseInt($(a).css("zIndex"), 10) || 0) - (parseInt($(b).css("zIndex"), 10) || 0))
+	});
+	
+	if(group.length < 1) return;
+
+	min = parseInt(group[0].style.zIndex, 10) || 0;
+	$(group).each(function(i) {
+		this.style.zIndex = min + i;
+	});
+	
+	if(elem == undefined) return;
+	$(elem).css('zIndex', min + group.length);
 }
 
 main();

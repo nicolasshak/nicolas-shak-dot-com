@@ -5,14 +5,13 @@ var options = {
     "bPaginate": false,
     "bAutoWidth": false,
     "searching": false,
-    "scrollCollapse": true,
-    "sScrollY":"250px",
+
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
     	if(!aData.IsDirectory) {
     		$(nRow).bind("dblclick", function(e) {
     			$.get('/open?path=' + aData.Path).then(function(data) {
-    				createFormattedWindow(escape(data));
+    				addFormattedWindow(data);
     			});
     		})
     	}

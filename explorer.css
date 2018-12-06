@@ -80,12 +80,6 @@ div.ui-icon-gripsmall-diagonal-se {
 	border-radius: 16px;
 }
 
-.top {
-	z-index: 2; 
-	position: relative
-}
-
 .bottom {
-	z-index: 1; 
-	position: relative
+	z-index: 1;
 }
