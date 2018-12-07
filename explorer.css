@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "basis-grotesque-trial-mono";
+  src: url("basis-grotesque-trial-mono.otf");
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	background-color: rgb(25, 25, 25);
+	font-family: 'basis-grotesque-trial-mono', sans-serif;
+}
+
+.windows {
+	height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+pre {
+	height: 100%;
+	margin: 0;
+	font-family: 'Space-Mono', monospace;
+}
+
+.window {
+	height: 500px;
+	width: 700px;
+
+	display: flex;
+	flex-direction: column;
+
+	position: fixed !important;
+	box-shadow: 5px 5px 30px rgb(15, 15, 15);
+	border-radius: 5px;
+	background-color: white;
+}
+
+.browser {
+
+}
+
+.window-generic {
+	height: 300;
+	width: 500;
+}
+
+.window-header {
+	background-color: rgb(175, 175, 175);
+	padding: 5pt;
+	border-radius: 5px 5px 1px 1px;
+	flex: 0 0 19px;
+}
+
+.window-contents {
+	border-radius: 0px 0px 5px 5px;
+	display: flex;
+	overflow: auto;
+}
+
+.window-header {
+	padding: 5px;
+	background-color: rgb(175, 175, 175);
+	border-radius: 5px 5px 1px 1px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.window-title {
+	margin-right: auto;
+}
+
+.sidebar {
+
+	flex: 0;
+	height: 100%;
+	background-color: rgb(225, 225, 225);
+}
+
+.category {
+	padding: 5px;
+}
+
+.files-wrapper {
+	height: 100%;
+}
+
+div.dataTables_length {
+	display: none;
+}
+
+div.ui-icon-gripsmall-diagonal-se {
+	background-color: white;
+	border-radius: 16px;
+}
+
+.bottom {
+	z-index: 1;
+}
+
+td {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

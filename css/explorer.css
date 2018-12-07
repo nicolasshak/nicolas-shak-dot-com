@@ -1,0 +1,72 @@
+@font-face {
+  font-family: "basis-grotesque-trial-mono";
+  src: url("basis-grotesque-trial-mono.otf");
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	background-color: rgb(25, 25, 25);
+	font-family: 'basis-grotesque-trial-mono', sans-serif;
+}
+
+.windows {
+	height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+pre {
+	margin: 0;
+	font-family: 'Space-Mono', monospace;
+}
+
+.window {
+	 box-shadow: 5px 5px 30px rgb(15, 15, 15);
+	 border-radius: 5px;
+}
+
+.browser {
+	width: 70vw;
+}
+
+.browser-header {
+	background-color: rgb(175, 175, 175);
+	padding: 5pt;
+	border-radius: 5px 5px 1px 1px;
+}
+
+.browser-body {
+	background-color: white;
+	height: 400pt;
+	border-radius: 0px 0px 5px 5px;
+	padding: 10px;
+}
+
+.window-generic {
+	position: absolute;
+	top: 50vh;
+}
+
+.window-header {
+	padding: 5px;
+	background-color: rgb(175, 175, 175);
+	border-radius: 5px 5px 1px 1px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.window-title {
+	margin-right: auto;
+}
+
+.window-contents {
+	padding: 10px;
+	background-color: white;
+	border-radius: 0px 0px 5px 5px;
+	height: 300px;
+	width: 500px;
+	overflow: scroll;
+}
