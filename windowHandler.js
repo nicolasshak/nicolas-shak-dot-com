@@ -1,43 +1,30 @@
 /*
- * Templates
+ * Get templates
  */
-var browser_text = [
-	'<div class="window browser">',
-		'<div class="window-header">',
-			'<div class="window-title">',
-				'Browser',
-			'</div>',
-		'</div>',
-		'<div class="window-contents">',
-			'<table class="files">',
-			'</table>',
-		'</div>',
-	'</div>',
-].join('\n');
+var browser_text;
+var window_text;
 
-var window_text = [
-	'<div class="window window-generic" style="z-index: 9999">',
-		'<div class="window-header">',
-			'<div class="window-title">',
-				'{{title}}',
-			'</div>',
-			'<button type="button" onclick="closeWindow(this)" class="window-close">',
-				'X',
-			'</button>',
-		'</div>',
+jQuery.ajax({
+	url: '/get?path=browser.html',
+	async: false,
+	success: function(result) {
+		browser_text = result;
+	}
+});
 
-			'{{content}}',
-
-	'</div>'
-].join('\n');
+jQuery.ajax({
+	url: '/get?path=window.html',
+	async: false,
+	success: function(result) {
+		window_text = result;
+	}
+});
 
 /*
  * Startup
  */
 function main() {
 	addWindow(browser_text, "");
-
-	
 }
 
 /*

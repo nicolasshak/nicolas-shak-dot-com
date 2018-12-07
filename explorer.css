@@ -19,6 +19,7 @@ body {
 }
 
 pre {
+	height: 100%;
 	margin: 0;
 	font-family: 'Space-Mono', monospace;
 }
@@ -54,9 +55,8 @@ pre {
 
 .window-contents {
 	border-radius: 0px 0px 5px 5px;
-	padding: 5px;
+	display: flex;
 	overflow: auto;
-	height: 100%;
 }
 
 .window-header {
@@ -71,6 +71,21 @@ pre {
 	margin-right: auto;
 }
 
+.sidebar {
+
+	flex: 0;
+	height: 100%;
+	background-color: rgb(225, 225, 225);
+}
+
+.category {
+	padding: 5px;
+}
+
+.files-wrapper {
+	height: 100%;
+}
+
 div.dataTables_length {
 	display: none;
 }
@@ -82,4 +97,10 @@ div.ui-icon-gripsmall-diagonal-se {
 
 .bottom {
 	z-index: 1;
+}
+
+td {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }

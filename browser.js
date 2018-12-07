@@ -8,28 +8,29 @@ var options = {
 
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
-    	if(!aData.IsDirectory) {
+    	if(!aData.isDirectory) {
     		$(nRow).bind("dblclick", function(e) {
-    			$.get('/open?path=' + aData.Path).then(function(data) {
+    			$.get('/open?path=' + aData.path).then(function(data) {
     				addFormattedWindow(data);
     			});
     		})
     	}
     	else {
     		$(nRow).bind("dblclick", function(e) {
-	    		//history.pushState(aData.Path, "", window.location + aData.Path);
-	       		$.get(aData.Parent + "/" + aData.Name).then(function(data) {
+	       		$.get(aData.parent + "/" + aData.name).then(function(data) {
 	    			table.fnClearTable();
 	    			table.fnAddData(data);
 	    		});
 	    		e.preventDefault();
 	    	});
     	}
-    	
     },
 
 	columns: [
-		{data: 'Name'}
+		{data: 'name'},
+        {data: 'date'},
+        {data: 'ext'},
+        {data: 'size'}
 	]
 }
 
@@ -38,5 +39,4 @@ var table = $('.files').dataTable(options);
 jQuery.get('/browse?path=/C:').then(function(data) {
 	table.fnClearTable();
 	table.fnAddData(data);
-})
-//history.replaceState(null, null, '/C:');
+});
