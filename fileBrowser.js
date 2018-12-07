@@ -17,24 +17,16 @@ exports.getFilesIn = function(req, res) {
 
 		files.forEach(function(file) {
 			try {
-				var isDirectory = fs.statSync(path.join(dir, file)).isDirectory();
-				if(isDirectory) {
-					data.push({
-						Name: file,
-						IsDirectory: true,
-						Path: path.join(dir, file),
-						Parent: req.url
-					})
-				}
-				else {
-					data.push({
-						Name: file,
-						Ext: path.extname(file),
-						IsDirectory: false,
-						Path: path.join(dir, file),
-						Parent: req.url
-					});
-				}
+				var stats = fs.statSync(path.join(dir, file));
+				data.push({
+					name: file,
+					date: stats.ctime,
+					ext: path.extname(file),
+					size: stats.size,
+					isDirectory: stats.isDirectory(),
+					path: path.join(dir, file),
+					parent: req.url
+				});
 			} catch(e) {
 				console.log(e);
 			}
@@ -44,8 +36,8 @@ exports.getFilesIn = function(req, res) {
 	});
 }
 
-exports.open = function(req, res) {
-	fs.readFile(req.query.path, 'utf8', function(err, contents) {
+exports.open = function(path, res) {
+	fs.readFile(path, 'utf8', function(err, contents) {
 		if(err) {
 			throw err;
 		}
