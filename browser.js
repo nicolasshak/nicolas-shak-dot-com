@@ -27,10 +27,10 @@ var options = {
     },
 
 	columns: [
-		{data: 'name'},
-        {data: 'date'},
-        {data: 'ext'},
-        {data: 'size'}
+		{"title": "Name", data: 'name'},
+        {"title": "Date modified", data: 'date'},
+        {"title": "Type", data: 'ext'},
+        {"title": "Size", data: 'size'}
 	]
 }
 

@@ -10,25 +10,14 @@ body {
 	font-family: 'basis-grotesque-trial-mono', sans-serif;
 }
 
-.windows {
-	height: 100vh;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 pre {
 	margin: 0;
 	font-family: 'Space-Mono', monospace;
 }
 
-.window {
-	 box-shadow: 5px 5px 30px rgb(15, 15, 15);
-	 border-radius: 5px;
-}
-
 .browser {
+	display: flex;
+	flex-direction: column;
 	width: 70vw;
 }
 
@@ -43,6 +32,19 @@ pre {
 	height: 400pt;
 	border-radius: 0px 0px 5px 5px;
 	padding: 10px;
+}
+
+.windows {
+	height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.window {
+	 box-shadow: 5px 5px 30px rgb(15, 15, 15);
+	 border-radius: 5px;
 }
 
 .window-generic {
@@ -69,4 +71,5 @@ pre {
 	height: 300px;
 	width: 500px;
 	overflow: scroll;
+	display: flex;
 }
