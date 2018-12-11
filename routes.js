@@ -4,13 +4,13 @@ const fs = require('fs');
 
 module.exports = function(app) {
 
-	app.use('*', function(req, res, next) {
-		console.log('request from: ', req.url);
+	app.use('/C:/*', function(req, res, next) {
+		console.log('Request from:', req.originalUrl);
 		next();
 	});
 
-	app.get('/', function(req, res) {
-		res.sendFile(path.join(__dirname, 'explorer.html'));
+	app.get('/C:/*', function(req, res) {
+		res.sendFile(path.join(__dirname, 'index.html'));
 	});
 
 	app.get('/browse', function(req, res) {
