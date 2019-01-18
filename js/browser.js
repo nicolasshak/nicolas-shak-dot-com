@@ -21,16 +21,17 @@ var options = {
 }
 
 var table = $('.files').dataTable(options);
+
 var Browser = {
-    currentPath: '',
+    history: new LinkedList(),
 
     /*
      * Sets current path to argument and updates table
      */
     jumpTo: function(absolutePath) {
-        jQuery.get(absolutePath).then(function(data) {
-            currentPath = absolutePath;
-            console.log(currentPath);
+        jQuery.get('/browse?path=' + absolutePath).then(function(data) {
+            this.history.setNext(absolutePath);
+            console.log(this.currentPath);
             table.fnClearTable();
             table.fnAddData(data);
         });
@@ -40,34 +41,19 @@ var Browser = {
      * Moves one level up or down based on argument
      */
     changeDirectory: function(path) {
-        currentPath += '/' + path;
-        this.jumpTo(currentPath);
+        this.currentPath += '/' + path;
+        this.jumpTo(this.currentPath);
+    },
+
+    oneUp: function() {
     },
 
     init: function() {
-        this.jumpTo('/browse?path=/C:');
+        this.jumpTo('/C:');
     }
 }
 Browser.init();
-/*
-var table = $('.files').dataTable(options);
 
-jQuery.get('/browse?path=/C:').then(function(data) {
-    table.fnClearTable();
-    table.fnAddData(data);
-});
-
-var currentPath = "";
-
-
-function changeDirectory(path) {
-
-}
-
-function jumpTo(absolutePath) {
-    
-}
-*/
 function setAction(element, data) {
 
     if(!data.isDirectory) {
@@ -79,6 +65,7 @@ function setAction(element, data) {
     }
     else {
         $(element).bind("click", function(e) {
+            console.log(data.parent);
             Browser.jumpTo(data.parent + "/" + data.name);
             e.preventDefault();
         });

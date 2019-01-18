@@ -4,7 +4,7 @@ const path = require('path');
 exports.getFilesIn = function(req, res) {
 
 	//substring removes the /C:
-	dir = __dirname + req.query.path.substring(3, req.url.length);
+	dir = __dirname + req.query.path.substring(2, req.url.length);
 
 	console.log('browsing', req.query.path);
 	fs.readdir(dir, function(err, files) {
@@ -25,7 +25,7 @@ exports.getFilesIn = function(req, res) {
 					size: stats.size,
 					isDirectory: stats.isDirectory(),
 					path: path.join(dir, file),
-					parent: req.url
+					parent: req.query.path
 				});
 			} catch(e) {
 				console.log(e);

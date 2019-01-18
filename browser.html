@@ -1,9 +1,9 @@
 <div class="window browser">
 	<div class="window-header browser-header">
-		<button type="button" onclick="closeWindow(this)" class="button window-close">
+		<button type="button" onclick="Browser.back()" class="button window-close">
 			<
 		</button>
-		<button type="button" onclick="closeWindow(this)" class="button button-right">
+		<button type="button" onclick="Browser.forward()" class="button button-right">
 			>
 		</button>
 		<div class="window-title path-box">
@@ -11,7 +11,7 @@
 				{{title}}
 			</div>
 		</div>
-		<button type="button" onclick="Browser.changeDirectory('..');" class="button window-close">
+		<button type="button" onclick="Browser.oneUp();" class="button window-close">
 			^
 		</button>
 	</div>
