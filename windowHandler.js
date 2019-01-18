@@ -24,7 +24,7 @@ jQuery.ajax({
  * Startup
  */
 function main() {
-	addWindow(browser_text, "");
+	addWindow(browser_text, "C:/Home", "");
 }
 
 /*
@@ -36,13 +36,13 @@ function closeWindow(element) {
 }
 
 function addFormattedWindow(contents) {
-	addWindow(window_text, '<pre class="window-contents">' + escape(contents) + '</pre>');
+	addWindow(window_text, 'EXPLORER.CSS', '<pre class="window-contents">' + escape(contents) + '</pre>');
 }
 
 
-function addWindow(template, contents) {
+function addWindow(template, title, contents) {
 	
-	var newWindow = template.replace(/{{title}}/g, 'window');
+	var newWindow = template.replace(/{{title}}/g, title);
 	newWindow = newWindow.replace(/{{content}}/g, contents)
 
 	$('.windows').append(newWindow);

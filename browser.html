@@ -1,8 +1,19 @@
 <div class="window browser">
-	<div class="window-header">
-		<div class="window-title">
-			Browser
+	<div class="window-header browser-header">
+		<button type="button" onclick="closeWindow(this)" class="button window-close">
+			<
+		</button>
+		<button type="button" onclick="closeWindow(this)" class="button button-right">
+			>
+		</button>
+		<div class="window-title path-box">
+			<div class="path">
+				{{title}}
+			</div>
 		</div>
+		<button type="button" onclick="Browser.changeDirectory('..');" class="button window-close">
+			^
+		</button>
 	</div>
 	<div class="window-contents">
 		<div class="sidebar">
