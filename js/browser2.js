@@ -1,18 +1,11 @@
 function Browser() {
+
     this.history = new LinkedList();
 
-/*
-    this.jumpTo = function(absolutePath) {
-        this.history.setNext(absolutePath);
-        console.log(this.history);
-        jQuery.get('/browse?path=' + absolutePath).then(function(data) {
-            table.fnClearTable();
-            table.fnAddData(data);
-        });
-    };
-*/
+    this.path = $('.path');
 
     this.updateTable = function() {
+        this.path.html(this.history.current.data);
         jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
             table.fnClearTable();
             table.fnAddData(data);
@@ -20,9 +13,7 @@ function Browser() {
     };
 
     this.changeDirectory = function(path) {
-        var currentPath = this.history.current.data;
-        currentPath += '/' + path;
-        this.history.setNext(currentPath);
+        this.history.setNext(path);
         this.updateTable();
     };
 
@@ -38,8 +29,13 @@ function Browser() {
 
     this.oneUp = function() {
        var path = this.history.current.data;
-       this.jumpTo(path.substring(0, path.lastIndexOf('/')));
+       this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
     };
+
+    this.oneDown = function(directoryName) {
+        var path = this.history.current.data;
+        this.changeDirectory(path + '/' + directoryName);
+    }
 
     this.init = function() {
         this.history.setNext('C:');
@@ -76,18 +72,35 @@ var table = $('.files').dataTable(options);
 
 function setAction(element, data) {
 
-    if(!data.isDirectory) {
+    if(data.isDirectory) {
         $(element).bind("click", function(e) {
-            jQuery.get('/open?path=' + data.path).then(function(data) {
-                addFormattedWindow(data);
-            });
+            //console.log(data.parent);
+            Browser.oneDown(data.name);
+            e.preventDefault();
         });
     }
     else {
-        $(element).bind("click", function(e) {
-            //console.log(data.parent);
-            Browser.changeDirectory(data.name);
-            e.preventDefault();
-        });
+
+        switch(data.ext) {
+            case '.lnk':
+                jQuery.get('/open?path=' + data.path).then(function(data) {
+                    $(element).bind('click', function(e) {
+                        window.open(data);
+                    });
+                });
+                break;
+            case '.png':
+                $(element).bind('click', function(e) {
+                    addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                });
+                break;
+            default:
+                // Query is in listener because it causes the window to be created after the bringFront call from click listener
+                $(element).bind('click', function(e) {
+                    jQuery.get('/open?path=' + data.path).then(function(contents) {
+                        addFormattedWindow(data.name, contents);
+                    });
+                });
+        }
     }
 }

@@ -83,10 +83,12 @@ pre {
 .window-contents {
 	border-style: solid;
 	border-width: 1px;
+	overflow: auto;
+}
 
+.browser-contents {
 	display: flex;
 	flex: 1 1 auto;
-	overflow: auto;
 }
 
 .window-title {

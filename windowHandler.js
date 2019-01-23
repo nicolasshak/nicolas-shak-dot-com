@@ -35,10 +35,9 @@ function closeWindow(element) {
 	$(element).parent().parent().remove();
 }
 
-function addFormattedWindow(contents) {
-	addWindow(window_text, 'EXPLORER.CSS', '<pre class="window-contents">' + escape(contents) + '</pre>');
+function addFormattedWindow(title, contents) {
+	addWindow(window_text, title, '<pre class="window-contents">' + escape(contents) + '</pre>');
 }
-
 
 function addWindow(template, title, contents) {
 	
@@ -60,6 +59,8 @@ function addWindow(template, title, contents) {
 	$('.window').on('click', function() {
 		bringFront($(this), '.window');
 	});
+
+	bringFront($('.window'), '.window');
 }
 
 /*
