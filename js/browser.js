@@ -1,3 +1,51 @@
+function Browser() {
+
+    this.history = new LinkedList();
+
+    this.path = $('.path');
+
+    this.updateTable = function() {
+        this.path.html(this.history.current.data);
+        jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
+            table.fnClearTable();
+            table.fnAddData(data);
+        });
+    };
+
+    this.changeDirectory = function(path) {
+        this.history.setNext(path);
+        this.updateTable();
+    };
+
+    this.forward = function() {
+        this.history.forward();
+        this.updateTable();
+    }
+
+    this.back = function() {
+        this.history.back();
+        this.updateTable();
+    }
+
+    this.oneUp = function() {
+       var path = this.history.current.data;
+       this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
+    };
+
+    this.oneDown = function(directoryName) {
+        var path = this.history.current.data;
+        this.changeDirectory(path + '/' + directoryName);
+    }
+
+    this.init = function() {
+        this.history.setNext('C:/Home');
+        this.updateTable();
+    };
+}
+
+var Browser = new Browser();
+Browser.init();
+
 var options = {
 
     "bProcessing": true,
@@ -22,52 +70,37 @@ var options = {
 
 var table = $('.files').dataTable(options);
 
-var Browser = {
-    history: new LinkedList(),
-
-    /*
-     * Sets current path to argument and updates table
-     */
-    jumpTo: function(absolutePath) {
-        jQuery.get('/browse?path=' + absolutePath).then(function(data) {
-            this.history.setNext(absolutePath);
-            console.log(this.currentPath);
-            table.fnClearTable();
-            table.fnAddData(data);
-        });
-    },
-
-    /*
-     * Moves one level up or down based on argument
-     */
-    changeDirectory: function(path) {
-        this.currentPath += '/' + path;
-        this.jumpTo(this.currentPath);
-    },
-
-    oneUp: function() {
-    },
-
-    init: function() {
-        this.jumpTo('/C:');
-    }
-}
-Browser.init();
-
 function setAction(element, data) {
 
-    if(!data.isDirectory) {
+    if(data.isDirectory) {
         $(element).bind("click", function(e) {
-            jQuery.get('/open?path=' + data.path).then(function(data) {
-                addFormattedWindow(data);
-            });
+            //console.log(data.parent);
+            Browser.oneDown(data.name);
+            e.preventDefault();
         });
     }
     else {
-        $(element).bind("click", function(e) {
-            console.log(data.parent);
-            Browser.jumpTo(data.parent + "/" + data.name);
-            e.preventDefault();
-        });
+
+        switch(data.ext) {
+            case '.lnk':
+                jQuery.get('/open?path=' + data.path).then(function(data) {
+                    $(element).bind('click', function(e) {
+                        window.open(data);
+                    });
+                });
+                break;
+            case '.png':
+                $(element).bind('click', function(e) {
+                    addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                });
+                break;
+            default:
+                // Query is in listener because it causes the window to be created after the bringFront call from click listener
+                $(element).bind('click', function(e) {
+                    jQuery.get('/open?path=' + data.path).then(function(contents) {
+                        addFormattedWindow(data.name, contents);
+                    });
+                });
+        }
     }
 }

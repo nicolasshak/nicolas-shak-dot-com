@@ -1,67 +1,96 @@
-var explorer_text = [
-	'<div class="window browser">',
-		'<div class="browser-header">',
-			'Browser',
-		'</div>',
-		'<div class="browser-body">',
-			'<table class="files">',
-			'</table>',
-		'</div>',
-	'</div>',
-].join('\n');
+/*
+ * Get templates
+ */
+var browser_text;
+var window_text;
 
-var window_text = [
-	'<div class="window window-generic">',
-		'<div class="window-header">',
-			'<div class="window-title">',
-				'{{title}}',
-			'</div>',
-			'<button type="button" onclick="closeWindow(this)" class="window-close">',
-				'X',
-			'</button>',
-		'</div>',
-		'<div class="window-contents">',
-			'{{content}}',
-		'</div>',
-	'</div>'
-].join('\n');
+jQuery.ajax({
+	url: '/get?path=/html/browser.html',
+	async: false,
+	success: function(result) {
+		browser_text = result;
+	}
+});
 
+jQuery.ajax({
+	url: '/get?path=/html/window.html',
+	async: false,
+	success: function(result) {
+		window_text = result;
+	}
+});
+
+/*
+ * Startup
+ */
 function main() {
-	$('.windows').append(explorer_text);
-	$('.browser').draggable({
-		handle: 'div.browser-header',
-	})
+	addWindow(browser_text, "C:/Home", "");
 }
+
+/*
+ * Window Handlers
+ */
 
 function closeWindow(element) {
 	$(element).parent().parent().remove();
 }
 
-function createWindow(contents) {
+function addFormattedWindow(title, contents) {
+	addWindow(window_text, title, '<pre class="window-contents">' + escape(contents) + '</pre>');
+}
+
+function addWindow(template, title, contents) {
 	
-	var newWindow = window_text.replace(/{{title}}/g, 'window');
+	var newWindow = template.replace(/{{title}}/g, title);
 	newWindow = newWindow.replace(/{{content}}/g, contents)
 
 	$('.windows').append(newWindow);
-	$('.window-generic').draggable({
-		handle: 'div.window-header'
+
+	$('.window').draggable({
+		handle: 'div.window-header',
+		stack: '.window'
 	});
+
+	$('.window').resizable({
+		minHeight: 84,
+		minWidth: 168
+	});
+
+	$('.window').on('click', function() {
+		bringFront($(this), '.window');
+	});
+
+	bringFront($('.window'), '.window');
 }
 
-function createFormattedWindow(contents) {
-	createWindow('<pre>' + contents + '</pre>');
-}
-
+/*
+ * Helper functions
+ */
 function escape(code) {
 
 	var escaped = code;
-	//escaped = code.replace(/'/g, '&quot;');
-	//escaped = escaped.replace(/"/g, '&quot;');
 	escaped = escaped.replace(/&/g, '&amp;');
 	escaped = escaped.replace(/</g, '&lt;');
 	escaped = escaped.replace(/>/g, '&gt;');
 
 	return escaped;
+}
+
+function bringFront(elem, stack){
+
+	var min, group = $(stack).sort(function(a, b) {
+		return ((parseInt($(a).css("zIndex"), 10) || 0) - (parseInt($(b).css("zIndex"), 10) || 0))
+	});
+	
+	if(group.length < 1) return;
+
+	min = parseInt(group[0].style.zIndex, 10) || 0;
+	$(group).each(function(i) {
+		this.style.zIndex = min + i;
+	});
+	
+	if(elem == undefined) return;
+	$(elem).css('zIndex', min + group.length);
 }
 
 main();

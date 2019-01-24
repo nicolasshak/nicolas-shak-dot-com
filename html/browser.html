@@ -17,9 +17,29 @@
 	</div>
 	<div class="window-contents browser-contents">
 		<div class="sidebar">
-			<div class="category">
-				Favorites
-			</div>
+			<ul class="category">
+				<li class="category-header">Favorites</li>
+				<li>
+					<ul>
+						<li onclick="Browser.changeDirectory('C:/Home')">
+							Home
+						</li>
+						<li onclick="Browser.changeDirectory('C:/Home/Work')">
+							Work
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="category">
+				<li class="category-header">Devices</li>
+				<li>
+					<ul>
+						<li onclick="Browser.changeDirectory('C:')">
+							(C:)
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 		<div class="files-wrapper">
 			<table class="files responsive"></table>
