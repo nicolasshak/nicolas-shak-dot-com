@@ -92,6 +92,5 @@ simplifyBytes = function(bytes) {
 }
 
 simplifyDate = function(timestamp) {
-	date = Date(timestamp);
-	return date.replace(' GMT-0800 (PST)', '');
+	return Date(timestamp);
 }
