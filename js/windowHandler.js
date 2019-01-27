@@ -46,19 +46,21 @@ function addWindow(template, title, contents) {
 
 	$('.windows').append(newWindow);
 
-	$('.window').draggable({
-		handle: 'div.window-header',
-		stack: '.window'
-	});
+	if(!isMobile()) {
+		$('.window').draggable({
+			handle: 'div.window-header',
+			stack: '.window'
+		});
 
-	$('.window').resizable({
-		minHeight: 84,
-		minWidth: 168
-	});
+		$('.window').resizable({
+			minHeight: 84,
+			minWidth: 168
+		});
 
-	$('.window').on('click', function() {
-		bringFront($(this), '.window');
-	});
+		$('.window').on('click', function() {
+			bringFront($(this), '.window');
+		});
+	}
 
 	bringFront($('.window'), '.window');
 }
@@ -91,6 +93,10 @@ function bringFront(elem, stack){
 	
 	if(elem == undefined) return;
 	$(elem).css('zIndex', min + group.length);
+}
+
+function isMobile() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
 
 main();
