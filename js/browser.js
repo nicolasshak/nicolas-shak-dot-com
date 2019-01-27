@@ -5,7 +5,7 @@ function Browser() {
     this.path = $('.path');
 
     this.updateTable = function() {
-        this.path.html(this.history.current.data);
+        this.path.html('/' + this.history.current.data);
         jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
             table.fnClearTable();
             table.fnAddData(data);
@@ -54,6 +54,7 @@ var options = {
     "bAutoWidth": false,
     "pageResize": true,
     "searching": false,
+    "fixedHeader": true,
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
         setAction(nRow, aData);
@@ -62,7 +63,7 @@ var options = {
     columns: [
         {"title": "Name", data: 'name'},
         {"title": "Date modified", data: 'date'},
-        {"title": "Type", data: 'ext'},
+        {"title": "Type", data: 'type'},
         {"title": "Size", data: 'size'}
     ]
 }

@@ -15,6 +15,14 @@ ul {
 	list-style: none;
 }
 
+li > ul {
+	margin-top: 5px;
+}
+
+li ~ li {
+	margin-top: 5px;
+}
+
 .windows {
 	height: 100vh;
 
@@ -31,6 +39,7 @@ ul {
 	text-align: center;
 
 	width: 35px;
+	height: 20px;
 }
 
 .button-right {
@@ -82,9 +91,7 @@ pre {
 }
 
 .browser-header {
-
 	padding: 10px;
-
 }
 
 .window-contents {
@@ -108,6 +115,7 @@ pre {
 
 	background-color: #ffffff;
 	width: 100%;
+	height: 20px;
 
 	margin: 0px 5px 0px 5px;
 }

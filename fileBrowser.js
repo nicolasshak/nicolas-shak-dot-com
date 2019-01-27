@@ -20,9 +20,10 @@ exports.getFilesIn = function(req, res) {
 				var stats = fs.statSync(path.join(dir, file));
 				data.push({
 					name: file,
-					date: stats.ctime,
+					date: simplifyDate(stats.ctime),
+					type: getFileType(path.extname(file)),
+					size: simplifyBytes(stats.size),
 					ext: path.extname(file),
-					size: stats.size,
 					isDirectory: stats.isDirectory(),
 					path: path.join(dir, file),
 					parent: req.query.path
@@ -46,4 +47,51 @@ exports.open = function(path, res) {
 			return;
 		}
 	});
+}
+
+getFileType = function(ext) {
+
+	if(ext == '') {
+		return 'folder'
+	}
+	else {
+		return ext;
+	}
+}
+
+simplifyBytes = function(bytes) {
+
+	var curr = bytes;
+	var level = 0;
+
+	while(curr > 1000) {
+		curr = curr/1000;
+		level++;
+	}
+
+	var size = '';
+
+	switch(level) {
+		case 0:
+			size = ' B';
+			break;
+		case 1:
+			size = ' KB';
+			break;
+		case 2:
+			size = ' MB';
+			break;
+		case 3:
+			size = ' GB';
+			break;
+		default:
+			return 'BIG';
+	}
+
+	return parseInt(curr, 10) + size;
+}
+
+simplifyDate = function(timestamp) {
+	date = Date(timestamp);
+	return date.replace(' GMT-0800 (PST)', '');
 }
