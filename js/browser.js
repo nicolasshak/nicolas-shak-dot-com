@@ -54,7 +54,6 @@ var options = {
     "bAutoWidth": false,
     "pageResize": true,
     "searching": false,
-    "scrollCollapse": true,
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
         setAction(nRow, aData);
