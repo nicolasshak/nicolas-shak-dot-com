@@ -23,6 +23,11 @@ li ~ li {
 	margin-top: 5px;
 }
 
+img {
+	width: auto;
+	height: 66vh;
+}
+
 .windows {
 	height: 100vh;
 
@@ -54,9 +59,6 @@ pre {
 }
 
 .window {
-	height: 500px;
-	width: 800px;
-
 	display: flex;
 	flex-direction: column;
 
@@ -66,13 +68,16 @@ pre {
 }
 
 .browser {
+	height: 66vh;
+	width: 66vw;
+
 	display: flex;
 	flex-direction: column;
 }
 
 .window-generic {
-	height: 300;
-	width: 500;
+	max-height: 100vh;
+	max-width: 100vw;
 }
 
 .window-header {
@@ -169,7 +174,7 @@ td {
  * MOBILE
  */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 436px) {
 	.window {
 		height: 100vh;
 		width: 100vw;

@@ -61,8 +61,6 @@ function addWindow(template, title, contents) {
 			bringFront($(this), '.window');
 		});
 	}
-
-	bringFront($('.window'), '.window');
 }
 
 /*

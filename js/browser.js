@@ -83,15 +83,19 @@ function setAction(element, data) {
 
         switch(data.ext) {
             case '.lnk':
-                jQuery.get('/open?path=' + data.path).then(function(data) {
+                jQuery.get('/open?path=' + data.path).then(function(contents) {
                     $(element).bind('click', function(e) {
-                        window.open(data);
+                        window.open(contents);
                     });
                 });
                 break;
             case '.png':
+            case '.jpg':
                 $(element).bind('click', function(e) {
-                    addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                    //jQuery request just to make sure image window appears after browser is brought to front
+                    jQuery.get('/open?path=' + data.path).then(function(contents) {
+                        addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                    });
                 });
                 break;
             default:
