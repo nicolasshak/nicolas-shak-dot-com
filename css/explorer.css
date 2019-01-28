@@ -17,15 +17,27 @@ ul {
 
 li > ul {
 	margin-top: 5px;
+	cursor: pointer;
 }
 
 li ~ li {
 	margin-top: 5px;
+	cursor: pointer;
 }
 
 img {
 	width: auto;
 	height: 66vh;
+}
+
+td {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+tr {
+	cursor: pointer;
 }
 
 .windows {
@@ -162,12 +174,6 @@ div.ui-icon-gripsmall-diagonal-se {
 
 .bottom {
 	z-index: 1;
-}
-
-td {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 }
 
 /*
