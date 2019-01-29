@@ -5,6 +5,8 @@ function Browser() {
     this.path = $('.path');
 
     this.updateTable = function() {
+        var currentPath = this.history.current.data;
+        //window.history.pushState({url: currentPath}, '', '/' + currentPath);
         this.path.html('/' + this.history.current.data);
         jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
             table.fnClearTable();
@@ -38,13 +40,23 @@ function Browser() {
     }
 
     this.init = function() {
-        this.history.setNext('C:/Home');
+        if(window.location.pathname.length <= 1) {
+            this.history.setNext('C:/Users/Nicolas_Shak');
+            //window.history.replaceState({url: 'C:/Home'}, '', '/C:/Home');
+        }
+        else {
+            this.history.setNext(window.location.pathname);
+        }
         this.updateTable();
     };
 }
 
 var Browser = new Browser();
 Browser.init();
+
+window.onpopstate = function(event) {
+    Browser.updateTable();
+}
 
 var options = {
 
