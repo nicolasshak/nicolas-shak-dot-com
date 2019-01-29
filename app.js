@@ -20,6 +20,6 @@ http.createServer(app).listen(HTTP_PORT, function() {
 	console.log('Server is bound to port: ', HTTP_PORT);
 });
 
-http.createServer(app).listen(HTTPS_PORT, function() {
+https.createServer(app).listen(HTTPS_PORT, function() {
 	console.log('Server is bound to port: ', HTTPS_PORT);
 });
