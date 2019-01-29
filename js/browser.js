@@ -111,11 +111,8 @@ function setAction(element, data) {
                 });
                 break;
             case '.pdf':
-                 $(element).bind('click', function(e) {
-                    //jQuery request just to make sure image window appears after browser is brought to front
-                    jQuery.get('/open?path=' + data.path).then(function(contents) {
-                        addWindow(window_text, data.name, '<embed class="window-contents pdf" src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"/>');
-                    });
+                $(element).bind('click', function(e) {
+                    window.open(data.parent.substring(3, data.parent.length) + '/' + data.name);
                 });
                 break;
             default:
