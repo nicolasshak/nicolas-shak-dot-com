@@ -1,6 +1,6 @@
 +--------------------------------------------------+
 |                                                  |
-| Static website written as a final project for my |
+| Static website written as a final project for my  |
 |                                                  |
 | LIT 80H class.                                   |
 |                                                  |

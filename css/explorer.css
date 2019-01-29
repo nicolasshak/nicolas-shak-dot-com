@@ -17,6 +17,7 @@ ul {
 
 li > ul {
 	margin-top: 5px;
+	padding-left: 10px;
 	cursor: pointer;
 }
 
@@ -90,6 +91,12 @@ pre {
 .window-generic {
 	max-height: 100vh;
 	max-width: 100vw;
+}
+
+.pdf {
+	width: 80vw;
+	height: 100vh;
+	flex-grow: 1;
 }
 
 .window-header {
@@ -177,7 +184,24 @@ div.ui-icon-gripsmall-diagonal-se {
 }
 
 /*
- * MOBILE
+ *	Overrides
+ */
+
+ #DataTables_Table_0 > thead > tr > th {
+ 	padding: 10px;
+ 	text-align: left;
+ }
+
+ #DataTables_Table_0 {
+ 	border-bottom: none;
+ }
+
+ #DataTables_Table_0_info {
+ 	display: none;
+ }
+
+/*
+ *	Mobile
  */
 
 @media only screen and (max-width: 436px) {
