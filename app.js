@@ -1,7 +1,7 @@
 http = require('http');
 
 //Change before committing
-const HTTP_PORT = 80;
+const HTTP_PORT = 3000;
 
 var express = require('express');
 var app = express();

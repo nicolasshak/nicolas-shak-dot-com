@@ -31,7 +31,8 @@ function Browser() {
 
     this.oneUp = function() {
         var path = this.history.current.data;
-        if(path == '/C:') {
+        console.log(path);
+        if(path == 'C:') {
             return;
         }
         this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
