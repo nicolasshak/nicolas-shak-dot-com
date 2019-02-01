@@ -97,13 +97,13 @@ function setAction(element, data) {
                 $(element).bind('click', function(e) {
                     //jQuery request just to make sure image window appears after browser is brought to front
                     jQuery.get('/open?path=' + data.path).then(function(contents) {
-                        addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                        addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location.hostname + '/' + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
                     });
                 });
                 break;
             case '.pdf':
                 $(element).bind('click', function(e) {
-                    window.open(window.location.pathname.substring(3, window.location.pathname.length) + '/' + data.name);
+                    window.open(window.location.hostname + '/' + data.name);
                 });
                 break;
             default:
