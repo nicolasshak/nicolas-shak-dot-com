@@ -97,7 +97,7 @@ function setAction(element, data) {
                 $(element).bind('click', function(e) {
                     //jQuery request just to make sure image window appears after browser is brought to front
                     jQuery.get('/open?path=' + data.path).then(function(contents) {
-                        addWindow(window_text, data.name, '<div class="window-contents"><img src="' + window.location.hostname + '/' + data.parent.substring(3, data.parent.length) + '/' + data.name + '"></div>');
+                        addWindow(window_text, data.name, '<div class="window-contents"><img src="/' + data.parent.substring(3, data.parent.length) + '/' + data.name + '""></div>');
                     });
                 });
                 break;
