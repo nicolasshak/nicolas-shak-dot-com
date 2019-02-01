@@ -1,9 +1,9 @@
 <div class="window browser">
 	<div class="window-header browser-header">
-		<button type="button" onclick="Browser.back()" class="button window-close">
+		<button type="button" onclick="Browser.back();window.history.go(-1);" class="button window-close">
 			<
 		</button>
-		<button type="button" onclick="Browser.forward()" class="button button-right">
+		<button type="button" onclick="Browser.forward();window.history.go(1);" class="button button-right">
 			>
 		</button>
 		<div class="window-title path-box">
@@ -21,10 +21,10 @@
 				<li class="category-header">Favorites</li>
 				<li>
 					<ul>
-						<li onclick="Browser.changeDirectory('C:/Users/Nicolas_Shak')">
+						<li onclick="Browser.changeDirectory('/C:/Users/Nicolas_Shak');Browser.pushHistory();">
 							Home
 						</li>
-						<li onclick="Browser.changeDirectory('C:/Users/Nicolas_Shak/Graphics')">
+						<li onclick="Browser.changeDirectory('/C:/Users/Nicolas_Shak/Graphics');Browser.pushHistory();">
 							Graphics
 						</li>
 					</ul>
@@ -34,7 +34,7 @@
 				<li class="category-header">Devices</li>
 				<li>
 					<ul>
-						<li onclick="Browser.changeDirectory('C:')">
+						<li onclick="Browser.changeDirectory('/C:');">
 							(C:)
 						</li>
 					</ul>

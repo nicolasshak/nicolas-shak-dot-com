@@ -1,66 +1,63 @@
 function Browser() {
 
-    this.history = new LinkedList();
-
     this.path = $('.path');
 
     this.updateTable = function() {
-        var currentPath = this.history.current.data;
-        //window.history.pushState({url: currentPath}, '', '/' + currentPath);
-        this.path.html('/' + this.history.current.data);
-        jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
+        var currentPath = window.location.pathname;
+        this.path.html(currentPath);
+        jQuery.get('/browse?path=' + currentPath.substring(1, currentPath.length)).then(function(data) {
             table.fnClearTable();
             table.fnAddData(data);
         });
-    };
+    }
 
     this.changeDirectory = function(path) {
-        this.history.setNext(path);
+        this.pushHistory(path);
         this.updateTable();
-    };
+    }
 
     this.forward = function() {
-        this.history.forward();
+        window.history.go(1);
         this.updateTable();
     }
 
     this.back = function() {
-        this.history.back();
+        window.history.go(-1);
         this.updateTable();
     }
 
     this.oneUp = function() {
-        var path = this.history.current.data;
-        console.log(path);
-        if(path == 'C:') {
-            return;
-        }
-        this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
-    };
+       var path = window.location.pathname;
+       this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
+    }
 
     this.oneDown = function(directoryName) {
-        var path = this.history.current.data;
-        this.changeDirectory(path + '/' + directoryName);
+        var currentPath = window.location.pathname;
+        var newPath = currentPath + '/' + directoryName;
+        this.pushHistory(newPath);
+        this.updateTable();
+    }
+
+    //Pushes this.history.current.data to window.history
+    this.pushHistory = function(path) {
+        window.history.pushState({url: path}, '', path);
     }
 
     this.init = function() {
-        if(window.location.pathname.length <= 1) {
-            this.history.setNext('C:/Users/Nicolas_Shak');
-            //window.history.replaceState({url: 'C:/Home'}, '', '/C:/Home');
-        }
-        else {
-            this.history.setNext(window.location.pathname);
+        currentPath = window.location.pathname;
+        if(currentPath.length <= 1) {
+            window.history.replaceState({url: 'C:/Users/Nicolas_Shak'}, '', '/C:/Users/Nicolas_Shak');
         }
         this.updateTable();
-    };
+    }
 }
 
 var Browser = new Browser();
 Browser.init();
 
-window.onpopstate = function(event) {
+window.addEventListener('popstate', function(event) {
     Browser.updateTable();
-}
+});
 
 var options = {
 
