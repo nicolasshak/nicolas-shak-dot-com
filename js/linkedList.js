@@ -18,27 +18,11 @@ function LinkedList() {
 		if(this.current != null && this.current.next != null) {
 			this.current = this.current.next;
 		}
-		else {
-			if(this.current == null) {
-				throw new Error('Attempted to call forward() while current is null!', this);
-			}
-			else {
-				throw new Error('Attempted to call forward() while current.next is null!', this);
-			}
-		}
 	};
 
 	this.back = function() {
 		if(this.current != null && this.current.last != null) {
 			this.current = this.current.last;
-		}
-		else {
-			if(this.current == null) {
-				throw new Error('Attempted to call back() while current is null!', this);
-			}
-			else {
-				throw new Error('Attempted to call back() while current.last is null!', this);
-			}
 		}
 	};
 
