@@ -1,69 +1,63 @@
 function Browser() {
 
-    this.history = new LinkedList();
-
     this.path = $('.path');
 
     this.updateTable = function() {
-        var currentPath = this.history.current.data;
-        this.path.html('/' + this.history.current.data);
-        jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
+        var currentPath = window.location.pathname;
+        this.path.html(currentPath);
+        jQuery.get('/browse?path=' + currentPath.substring(1, currentPath.length)).then(function(data) {
             table.fnClearTable();
             table.fnAddData(data);
         });
-    };
+    }
 
     this.changeDirectory = function(path) {
-        this.history.setNext(path);
+        this.pushHistory(path);
         this.updateTable();
-        window.history.pushState({url: path}, '', '/' + path);
-    };
+    }
 
     this.forward = function() {
-        this.history.forward();
-        this.updateTable();
         window.history.go(1);
+        this.updateTable();
     }
 
     this.back = function() {
-        this.history.back();
-        this.updateTable();
         window.history.go(-1);
+        this.updateTable();
     }
 
     this.oneUp = function() {
-       var path = this.history.current.data;
+       var path = window.location.pathname;
        this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
-    };
+    }
 
     this.oneDown = function(directoryName) {
-        var path = this.history.current.data;
-        this.changeDirectory(path + '/' + directoryName);
+        var currentPath = window.location.pathname;
+        var newPath = currentPath + '/' + directoryName;
+        this.pushHistory(newPath);
+        this.updateTable();
+    }
+
+    //Pushes this.history.current.data to window.history
+    this.pushHistory = function(path) {
+        window.history.pushState({url: path}, '', path);
     }
 
     this.init = function() {
         currentPath = window.location.pathname;
         if(currentPath.length <= 1) {
-            this.history.setNext('C:/Users/Nicolas_Shak');
-        }
-        else {
-            this.history.setNext(currentPath.substring(1, currentPath.length));
+            window.history.replaceState({url: 'C:/Users/Nicolas_Shak'}, '', '/C:/Users/Nicolas_Shak');
         }
         this.updateTable();
-        window.history.replaceState({url: this.history.current.data}, '', '/' + this.history.current.data);
-    };
+    }
 }
 
 var Browser = new Browser();
 Browser.init();
 
-window.onpopstate = function(event) {
-    console.log(event);
-    if(window.location.pathname != Browser.history.current.data) {
-        Browser.changeDirectory(dropFirst(window.location.pathname));
-        Browser.updateTable();
-    }
-}
+window.addEventListener('popstate', function(event) {
+    Browser.updateTable();
+});
 
 var options = {
 
@@ -134,8 +128,4 @@ function setAction(element, data) {
                 });
         }
     }
-}
-
-function dropFirst(string) {
-    return string.substring(1, string.length);
 }
