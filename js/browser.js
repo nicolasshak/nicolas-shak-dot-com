@@ -16,16 +16,6 @@ function Browser() {
         this.updateTable();
     }
 
-    this.forward = function() {
-        window.history.go(1);
-        this.updateTable();
-    }
-
-    this.back = function() {
-        window.history.go(-1);
-        this.updateTable();
-    }
-
     this.oneUp = function() {
        var path = window.location.pathname;
        this.changeDirectory(path.substring(0, path.lastIndexOf('/')));
