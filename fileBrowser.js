@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const BLACKLIST = ['.git', '.gitignore'];
+
 exports.getFilesIn = function(req, res) {
 
 	//substring removes the /C:
@@ -18,16 +20,18 @@ exports.getFilesIn = function(req, res) {
 		files.forEach(function(file) {
 			try {
 				var stats = fs.statSync(path.join(dir, file));
-				data.push({
-					name: file,
-					date: simplifyDate(stats.ctime),
-					type: getFileType(path.extname(file)),
-					size: simplifyBytes(stats.size),
-					ext: path.extname(file),
-					isDirectory: stats.isDirectory(),
-					path: path.join(dir, file),
-					parent: req.query.path
-				});
+				if(!isBlackListed(file, BLACKLIST)) {
+					data.push({
+						name: file,
+						date: simplifyDate(stats.ctime),
+						type: getFileType(path.extname(file)),
+						size: simplifyBytes(stats.size),
+						ext: path.extname(file),
+						isDirectory: stats.isDirectory(),
+						path: path.join(dir, file),
+						parent: req.query.path
+					});
+				}
 			} catch(e) {
 				console.log(e);
 			}
@@ -38,6 +42,7 @@ exports.getFilesIn = function(req, res) {
 }
 
 exports.open = function(path, res) {
+
 	fs.readFile(path, 'utf8', function(err, contents) {
 		if(err) {
 			throw err;
@@ -47,6 +52,19 @@ exports.open = function(path, res) {
 			return;
 		}
 	});
+}
+
+isBlackListed = function(fileName, blacklistedExtensions) {
+
+	blacklist = blacklistedExtensions;
+
+	for(var i = 0; i < blacklist.length; i++) {
+		if(fileName.includes(blacklist[i])) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 getFileType = function(ext) {
