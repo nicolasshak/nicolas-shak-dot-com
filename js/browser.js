@@ -6,7 +6,6 @@ function Browser() {
 
     this.updateTable = function() {
         var currentPath = this.history.current.data;
-        //window.history.pushState({url: currentPath}, '', '/' + currentPath);
         this.path.html('/' + this.history.current.data);
         jQuery.get('/browse?path=' + this.history.current.data).then(function(data) {
             table.fnClearTable();
@@ -17,16 +16,19 @@ function Browser() {
     this.changeDirectory = function(path) {
         this.history.setNext(path);
         this.updateTable();
+        window.history.pushState({url: path}, '', '/' + path);
     };
 
     this.forward = function() {
         this.history.forward();
         this.updateTable();
+        window.history.go(1);
     }
 
     this.back = function() {
         this.history.back();
         this.updateTable();
+        window.history.go(-1);
     }
 
     this.oneUp = function() {
@@ -40,14 +42,15 @@ function Browser() {
     }
 
     this.init = function() {
-        if(window.location.pathname.length <= 1) {
+        currentPath = window.location.pathname;
+        if(currentPath.length <= 1) {
             this.history.setNext('C:/Users/Nicolas_Shak');
-            //window.history.replaceState({url: 'C:/Home'}, '', '/C:/Home');
         }
         else {
-            this.history.setNext(window.location.pathname);
+            this.history.setNext(currentPath.substring(1, currentPath.length));
         }
         this.updateTable();
+        window.history.replaceState({url: this.history.current.data}, '', '/' + this.history.current.data);
     };
 }
 
@@ -55,7 +58,11 @@ var Browser = new Browser();
 Browser.init();
 
 window.onpopstate = function(event) {
-    Browser.updateTable();
+    console.log(event);
+    if(window.location.pathname != Browser.history.current.data) {
+        Browser.changeDirectory(dropFirst(window.location.pathname));
+        Browser.updateTable();
+    }
 }
 
 var options = {
@@ -127,4 +134,8 @@ function setAction(element, data) {
                 });
         }
     }
+}
+
+function dropFirst(string) {
+    return string.substring(1, string.length);
 }
