@@ -103,7 +103,7 @@ function setAction(element, data) {
                 break;
             case '.pdf':
                 $(element).bind('click', function(e) {
-                    window.open(window.location.hostname + '/' + data.name);
+                    window.open(data.parent.substring(2, data.parent.length) + '/' + data.name);
                 });
                 break;
             default:
