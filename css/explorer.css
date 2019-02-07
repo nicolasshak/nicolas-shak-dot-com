@@ -167,6 +167,18 @@ pre {
 	overflow: auto;
 }
 
+.folder-icon {
+	height: 18px;
+	width: 18px;
+	margin: 0px 10px 0px 0px;
+}
+
+.file-icon {
+	height:18px;
+	width: 18px;
+	margin: 0px 10px 0px 0px;
+}
+
 .category {
 	padding: 5px;
 }
@@ -199,6 +211,11 @@ div.ui-icon-gripsmall-diagonal-se {
 
  #DataTables_Table_0_info {
  	display: none;
+ }
+
+ .sorting_1 {
+ 	display: flex;
+ 	flex-direction: row;
  }
 
 /*
