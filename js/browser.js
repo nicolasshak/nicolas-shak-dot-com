@@ -60,6 +60,14 @@ var options = {
     "fixedHeader": true,
 
     "fnCreatedRow" : function(nRow, aData, iDataIndex) {
+        var icon = '';
+        if(aData.type == 'folder') {
+            icon = '<img class="folder-icon" src="/img/folder.svg"></img>';
+        }
+        else {
+            icon = '<img class="file-icon" src="/img/file.svg"></img>';
+        }
+        $('td:eq(0)', nRow).html(icon + '<div>' + aData.name + '</div>');
         setAction(nRow, aData);
     },
 
