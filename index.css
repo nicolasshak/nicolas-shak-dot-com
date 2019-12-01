@@ -1,0 +1,36 @@
+body {
+  background-color: #faf9f2;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  font-family: "Roboto";
+}
+body main {
+  height: 80vh;
+  width: 44.4444444444vh;
+  margin: auto;
+  background-color: #0f0f0f;
+}
+body main ul {
+  list-style: none;
+  padding-left: 0px;
+  font-size: 24px;
+  color: #faf9f2;
+  width: 100%;
+  padding-top: 25%;
+  padding-bottom: 25%;
+  height: 50%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+body main ul li {
+  text-align: center;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=index.css.map */

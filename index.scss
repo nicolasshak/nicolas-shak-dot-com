@@ -1,0 +1,46 @@
+$menu-height: 80vh;
+$menu-width: ( $menu-height / 9 ) * 5;
+
+$background-color: #faf9f2;
+$menu-color: #0f0f0f;
+
+body {
+	background-color: $background-color;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	margin: 0px;
+	font-family: 'Roboto';
+
+	main {
+		height: $menu-height;
+		width: $menu-width;
+		margin: auto;
+		background-color: $menu-color;
+
+		ul {
+
+			$padding: 25%;
+			list-style: none;
+			padding-left: 0px;
+			font-size: 24px;
+			color: $background-color;
+			width: 100%;
+			padding-top: $padding;
+			padding-bottom: $padding;
+			height: 100% - ( 2 * $padding );
+			margin: 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			display: flex;
+			flex-direction: column;
+
+			li {
+				text-align: center;
+				font-weight: 700;
+			}
+		}
+	}
+}
